@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 
 const MenuItem = (props) => {
      let navigate=useNavigate()
-    console.log("propidedades", navigate);
+     console.log("propidedades", navigate);
      return(
           <div className={`${props.size} menu-item`}
                onClick={()=>navigate(`${props.linkUrl}`)
