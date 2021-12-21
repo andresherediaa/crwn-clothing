@@ -15,8 +15,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       };
     case CartActionTypes.ADD_ITEM:
       let addItems=addItemToCart(state.cartItems, action.payload )
-
-      console.log("NEW ADDITEMS", addItems)
       return {
         ...state,
         cartItems: addItems,

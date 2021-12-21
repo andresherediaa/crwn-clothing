@@ -6,11 +6,15 @@ import { connect } from "react-redux";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 
 const CartDropDown = ({ cartItems }) => (
-  <div className='cart-dropdown'>
-    <div className='cart-items'>
-      {cartItems.map(cartItem => (
-        <CartItem key={cartItem.id} item={cartItem} />
-      ))}
+  <div className="cart-dropdown">
+    <div className="cart-items">
+      {cartItems.length ? (
+        cartItems.map((cartItem) => (
+          <CartItem key={cartItem.id} item={cartItem} />
+        ))
+      ) : (
+        <div>Your cart is empty</div>
+      )}
     </div>
     <CustomButton>GO TO CHECKOUT</CustomButton>
   </div>
