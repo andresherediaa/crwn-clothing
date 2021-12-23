@@ -1,0 +1,27 @@
+.itemContainer {
+  border-bottom: 1px solid darkgrey;
+  width: 55%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
+  &__block {
+    width: 23%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &--close {
+      width: 8%;
+      cursor: pointer;
+    }
+  }
+  &__img {
+    width: 23%;
+    padding: 10px 10px;
+    img {
+      width: 100%;
+    }
+  }
+}

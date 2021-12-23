@@ -9,7 +9,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { Navigate } from "react-router-dom";
-import {selectCurrentUser} from './redux/user/user.selector'
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
+import Checkout from "./pages/checkout/Checkout.component";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +41,11 @@ class App extends React.Component {
   }
 
   logeado = () => {
-    return this.props.currentUser ? <Navigate to='/' />: <SignInAndSignUpPage />;
+    return this.props.currentUser ? (
+      <Navigate to="/" />
+    ) : (
+      <SignInAndSignUpPage />
+    );
   };
 
   render() {
@@ -50,14 +56,15 @@ class App extends React.Component {
           <Route exact path="/" element={<Homepage />} />
           <Route exact path="/shop" element={<ShopPage />} />
           <Route exact path="/signin" element={this.logeado()} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: selectCurrentUser(state),
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

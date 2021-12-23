@@ -14,7 +14,6 @@ const CartIcon = ({ toggleCartHidden, countItems }) => (
 const mapDispatchToProps = (dispatch) => ({
   toggleCartHidden: () => dispatch(toggleCartHidden()),
 });
-
 const mapStateToProps = (state) => ({  
   countItems:  selectCartItemsCount(state)
 })
