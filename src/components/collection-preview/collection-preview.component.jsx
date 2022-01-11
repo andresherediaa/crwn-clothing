@@ -1,9 +1,9 @@
 import CollectionItem from "../collection-item/collection-item.componnet"
 import './collection-preview.styles.scss'
 
-const CollectionPreview=({title, items})=> (
+const CollectionPreview=({routeName, items})=> (
           <div className='collection-preview'>
-               <div className='title'>{title.toUpperCase()}</div>
+               <div className='title'>{routeName.toUpperCase()}</div>
                <div className='preview'>
                     {
                          items.filter((item, idx)=>idx<4).map(item=>(

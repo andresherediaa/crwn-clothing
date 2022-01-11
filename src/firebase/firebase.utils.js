@@ -19,9 +19,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return; //si no existe el usuario
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get(); //trae el objetoocn datos
-
-  console.log("createUserProfileDocument", userAuth, additionalData);
-
   if (!snapShot.exists) {
     //veriifca qu el usurio existe
     const { displayName, email } = userAuth;

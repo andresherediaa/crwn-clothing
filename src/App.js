@@ -30,7 +30,6 @@ class App extends React.Component {
           });
         });
       } else {
-        console.log("SUSCRIBE A onAuthStateChanged");
         setCurrentUser(userAuth);
       }
     });
@@ -54,9 +53,9 @@ class App extends React.Component {
         <Header />
         <Routes>
           <Route exact path="/" element={<Homepage />} />
-          <Route exact path="/shop" element={<ShopPage />} />
-          <Route exact path="/signin" element={this.logeado()} />
+          <Route path="/shop/*" element={<ShopPage />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route exact path="/signin" element={this.logeado()} />
         </Routes>
       </div>
     );
