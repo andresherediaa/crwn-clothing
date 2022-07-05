@@ -18,7 +18,6 @@ export default class SignUp extends Component {
     this.setState({
       [name]: value,
     });
-    console.log("chege**", name, value);
   };
 
   handleSubmit = async (event) => {
@@ -34,6 +33,7 @@ export default class SignUp extends Component {
         email,
         password
       );
+      console.log("creet user", user);
       await createUserProfileDocument(user, { displayName });
       this.setState({
         displayName: "",
