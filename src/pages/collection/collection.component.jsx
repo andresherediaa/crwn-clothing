@@ -5,7 +5,6 @@ import CollectionItem from "../../components/collection-item/collection-item.com
 import { useParams } from "react-router";
 import {  useSelector } from "react-redux";
 const CollectionPage = () => {
-  //const {items, routeName}= collection;
   const { id } = useParams();
   
    
