@@ -26,12 +26,15 @@ export const selectCollection = (collectionUrlParam) =>
     );
   });
 
-export const selectIsFetchingCollection = createSelector (
+export const selectIsFetchingCollection = createSelector(
   [selectShop],
-  (shop)=>shop.isFetching
-)
+  (shop) => shop.isFetching
+);
 
-export const selectIsCollectionLoaded =createSelector (
+export const selectIsCollectionLoaded = createSelector(
   [selectCollections],
-  (collections)=> !!collections
-)
+  (collections) => {
+    console.log("******collections", collections)
+   return !!collections;
+  }
+);

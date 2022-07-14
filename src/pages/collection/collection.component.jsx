@@ -4,7 +4,7 @@ import { selectCollection } from "../../redux/shop/shop.selectors";
 import CollectionItem from "../../components/collection-item/collection-item.componnet";
 import { useParams } from "react-router";
 import {  useSelector } from "react-redux";
-const CollectionPage = () => {
+const CollectionPage = (props) => {
   const { id } = useParams();
   
    
