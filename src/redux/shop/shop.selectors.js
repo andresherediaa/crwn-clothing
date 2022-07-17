@@ -34,7 +34,6 @@ export const selectIsFetchingCollection = createSelector(
 export const selectIsCollectionLoaded = createSelector(
   [selectCollections],
   (collections) => {
-    console.log("******collections", collections)
    return !!collections;
   }
 );
