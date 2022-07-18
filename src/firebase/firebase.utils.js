@@ -39,7 +39,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   //const userRef = firestore.doc(`users/${userAuth.uid}`);
 };
 
-export const addCollectionDocuments = async (collectionKey, objectsToAdd) => {//function to save a collection in firstore
+export const addCollectionDocuments = async (collectionKey, objectsToAdd) => {
+  //function to save a collection in firstore
   const collectionRef = firestore.collection(collectionKey);
   const batch = firestore.batch();
   objectsToAdd.forEach((obj) => {
@@ -49,26 +50,25 @@ export const addCollectionDocuments = async (collectionKey, objectsToAdd) => {//
   return await batch.commit(); //envia a gaurdar a firebase las colecciones de datos hats , sneakers etc
 };
 
-export const convertCollectionsSnapshpotToMap = collectionsSnapshot => {
-  const transformedCollection = collectionsSnapshot.docs.map(doc => {
-    const {title,  items} = doc.data();
+export const convertCollectionsSnapshpotToMap = (collectionsSnapshot) => {
+  const transformedCollection = collectionsSnapshot.docs.map((doc) => {
+    const { title, items } = doc.data();
     return {
-      routeName : encodeURI(title.toLowerCase()),
-      id:doc.id,
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
       title,
-      items
-    }
-  })
+      items,
+    };
+  });
 
-return transformedCollection.reduce((accumulator, collection)=>{
-  accumulator[collection.title]=collection
-  return accumulator;
-}, {})
- 
-}
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title] = collection;
+    return accumulator;
+  }, {});
+};
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;

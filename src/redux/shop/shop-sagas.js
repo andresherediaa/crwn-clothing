@@ -25,6 +25,5 @@ export function* fetchCollections() {
 }
 
 export function* onFetchCollectionsStart() {
-    console.log("eeeeee");
   yield takeLatest(ShopActionTypes.FETCH_COLLECTIONS_START, fetchCollections);
 }

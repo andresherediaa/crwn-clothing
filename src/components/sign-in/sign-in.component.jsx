@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import "./sign-in.styles.scss";
-import { signInWithGoogle } from "../../firebase/firebase.utils";
-import { auth} from "../../firebase/firebase.utils";
-
-export default class SignIn extends Component {
+import { auth } from "../../firebase/firebase.utils";
+import { googleSignInStart } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,8 +17,9 @@ export default class SignIn extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = this.state;
+    console.log("SUBMIT FILEDS", email, password);
     try {
-      await auth.signInWithEmailAndPassword(email,password)
+      await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: "", password: "" });
     } catch (error) {
       console.log("EROR REGISTRNAD USUARIO CON EMAIL Y PASSWORD", error);
@@ -58,7 +59,11 @@ export default class SignIn extends Component {
 
           <div className="buttons">
             <CustomButton type="submit">Sign in</CustomButton>
-            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            <CustomButton
+              type="button"
+              onClick={this.props.googleSignInStart}
+              isGoogleSignIn
+            >
               Sign in with Google
             </CustomButton>
           </div>
@@ -67,3 +72,11 @@ export default class SignIn extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    googleSignInStart: () => dispatch(googleSignInStart()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignIn);
