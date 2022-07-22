@@ -7,7 +7,7 @@ import SignInAndSignUpPage from "./pages/sign-in-sign-up/sign-in-and-sign-up.com
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import React from "react";
 import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/user/user.actions";
+import { checkUserSession } from "./redux/user/user.actions";
 import { Navigate } from "react-router-dom";
 import { selectCurrentUser } from "./redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
@@ -20,7 +20,10 @@ class App extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { checkUserSession } = this.props;
+    checkUserSession(); 
+  }
 
   logeado = () => {
     return this.props.currentUser ? (
@@ -49,4 +52,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => {
+  return { checkUserSession: () => dispatch(checkUserSession()) };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

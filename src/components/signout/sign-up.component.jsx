@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
-export default class SignUp extends Component {
+import { connect } from "react-redux";
+import { signUpStart } from "../../redux/user/user.actions";
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,27 +24,24 @@ export default class SignUp extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { displayName, email, password, confirmPassword } = this.state;
+    const { signUp } = this.props;
     if (password !== confirmPassword) {
       alert("Contrasenas no coinciden");
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log("creet user", user);
-      await createUserProfileDocument(user, { displayName });
-      this.setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      console.log("ERROR REGISTRANDO USUARIO***");
-    }
+    signUp({
+      email,
+      password,
+      displayName,
+    });
+
+    this.setState({
+      displayName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
   };
 
   render() {
@@ -91,3 +89,11 @@ export default class SignUp extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (user) => dispatch(signUpStart(user)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);
